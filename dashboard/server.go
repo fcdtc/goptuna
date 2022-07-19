@@ -61,7 +61,7 @@ func handleGetIndex(w http.ResponseWriter, r *http.Request) {
 <html lang="en">
 
 <head>
-    <title>Goptuna Dashboard</title>
+    <title>Whoami HPO Dashboard</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
