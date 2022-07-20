@@ -61,7 +61,7 @@ export const GraphSlice: FC<{
         <Grid container direction="column">
           {paramNames.length !== 0 && selected !== null ? (
             <FormControl component="fieldset" className={classes.formControl}>
-              <InputLabel id="parameter">Parameter</InputLabel>
+              <InputLabel id="parameter">参数选择</InputLabel>
               <Select value={selected} onChange={handleSelectedParam}>
                 {paramNames.map((p, i) => (
                   <MenuItem value={p} key={i}>

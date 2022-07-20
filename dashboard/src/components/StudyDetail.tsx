@@ -11,14 +11,14 @@ import {
   Grid,
   Toolbar,
   Paper,
-  Box,
+  // Box,
   IconButton,
   Select,
   MenuItem,
 } from "@material-ui/core"
 import { Home, Cached } from "@material-ui/icons"
 
-import { DataGridColumn, DataGrid } from "./DataGrid"
+// import { DataGridColumn, DataGrid } from "./DataGrid"
 import { GraphParallelCoordinate } from "./GraphParallelCoordinate"
 // import { GraphIntermediateValues } from "./GraphIntermediateValues"
 import { GraphSlice } from "./GraphSlice"
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
     },
     card: {
-      margin: theme.spacing(2),
+      margin: theme.spacing(10),
     },
     reload: {
       position: "relative",
@@ -195,151 +195,151 @@ export const StudyDetail: FC<{}> = () => {
               <GraphSlice trials={trials} />
             </CardContent>
           </Card>
-          <Card className={classes.card}>
-            <TrialTable trials={trials} />
-          </Card>
+          {/*<Card className={classes.card}>*/}
+          {/*  <TrialTable trials={trials} />*/}
+          {/*</Card>*/}
         </div>
       </Container>
     </div>
   )
 }
 
-const TrialTable: FC<{ trials: Trial[] }> = ({ trials = [] }) => {
-  const columns: DataGridColumn<Trial>[] = [
-    { field: "number", label: "Number", sortable: true, padding: "none" },
-    {
-      field: "state",
-      label: "State",
-      sortable: true,
-      filterable: true,
-      padding: "none",
-      toCellValue: (i) => trials[i].state.toString(),
-    },
-    { field: "value", label: "Value", sortable: true },
-    {
-      field: "datetime_start",
-      label: "Duration(sec)",
-      toCellValue: (i) => {
-        const startMs = trials[i].datetime_start?.getTime()
-        const completeMs = trials[i].datetime_complete?.getTime()
-        if (startMs !== undefined && completeMs !== undefined) {
-          return ((completeMs - startMs) / 1000).toString()
-        }
-        return null
-      },
-      sortable: true,
-      less: (firstEl, secondEl): number => {
-        const firstStartMs = firstEl.datetime_start?.getTime()
-        const firstCompleteMs = firstEl.datetime_complete?.getTime()
-        const firstDurationMs =
-          firstStartMs !== undefined && firstCompleteMs !== undefined
-            ? firstCompleteMs - firstStartMs
-            : undefined
-        const secondStartMs = secondEl.datetime_start?.getTime()
-        const secondCompleteMs = secondEl.datetime_complete?.getTime()
-        const secondDurationMs =
-          secondStartMs !== undefined && secondCompleteMs !== undefined
-            ? secondCompleteMs - secondStartMs
-            : undefined
-
-        if (firstDurationMs === secondDurationMs) {
-          return 0
-        } else if (
-          firstDurationMs !== undefined &&
-          secondDurationMs !== undefined
-        ) {
-          return firstDurationMs < secondDurationMs ? 1 : -1
-        } else if (firstDurationMs !== undefined) {
-          return -1
-        } else {
-          return 1
-        }
-      },
-    },
-    {
-      field: "params",
-      label: "Params",
-      toCellValue: (i) =>
-        trials[i].params.map((p) => p.name + ": " + p.value).join(", "),
-    },
-  ]
-  const collapseParamColumns: DataGridColumn<TrialParam>[] = [
-    { field: "name", label: "Name", sortable: true },
-    { field: "value", label: "Value", sortable: true },
-  ]
-  const collapseIntermediateValueColumns: DataGridColumn<
-    TrialIntermediateValue
-  >[] = [
-    { field: "step", label: "Step", sortable: true },
-    { field: "value", label: "Value", sortable: true },
-  ]
-  const collapseAttrColumns: DataGridColumn<Attribute>[] = [
-    { field: "key", label: "Key", sortable: true },
-    { field: "value", label: "Value", sortable: true },
-  ]
-
-  const collapseBody = (index: number) => {
-    return (
-      <Grid container direction="row">
-        <Grid item xs={6}>
-          <Box margin={1}>
-            <Typography variant="h6" gutterBottom component="div">
-              Parameters
-            </Typography>
-            <DataGrid<TrialParam>
-              columns={collapseParamColumns}
-              rows={trials[index].params}
-              keyField={"name"}
-              dense={true}
-              rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
-            />
-            <Typography variant="h6" gutterBottom component="div">
-              Trial user attributes
-            </Typography>
-            <DataGrid<Attribute>
-              columns={collapseAttrColumns}
-              rows={trials[index].user_attrs}
-              keyField={"key"}
-              dense={true}
-              rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Box margin={1}>
-            <Typography variant="h6" gutterBottom component="div">
-              Intermediate values
-            </Typography>
-            <DataGrid<TrialIntermediateValue>
-              columns={collapseIntermediateValueColumns}
-              rows={trials[index].intermediate_values}
-              keyField={"step"}
-              dense={true}
-              rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
-            />
-            <Typography variant="h6" gutterBottom component="div">
-              Trial system attributes
-            </Typography>
-            <DataGrid<Attribute>
-              columns={collapseAttrColumns}
-              rows={trials[index].system_attrs}
-              keyField={"key"}
-              dense={true}
-              rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
-            />
-          </Box>
-        </Grid>
-      </Grid>
-    )
-  }
-
-  return (
-    <DataGrid<Trial>
-      columns={columns}
-      rows={trials}
-      keyField={"trial_id"}
-      dense={true}
-      collapseBody={collapseBody}
-    />
-  )
-}
+// const TrialTable: FC<{ trials: Trial[] }> = ({ trials = [] }) => {
+//   const columns: DataGridColumn<Trial>[] = [
+//     { field: "number", label: "Number", sortable: true, padding: "none" },
+//     {
+//       field: "state",
+//       label: "State",
+//       sortable: true,
+//       filterable: true,
+//       padding: "none",
+//       toCellValue: (i) => trials[i].state.toString(),
+//     },
+//     { field: "value", label: "Value", sortable: true },
+//     {
+//       field: "datetime_start",
+//       label: "Duration(sec)",
+//       toCellValue: (i) => {
+//         const startMs = trials[i].datetime_start?.getTime()
+//         const completeMs = trials[i].datetime_complete?.getTime()
+//         if (startMs !== undefined && completeMs !== undefined) {
+//           return ((completeMs - startMs) / 1000).toString()
+//         }
+//         return null
+//       },
+//       sortable: true,
+//       less: (firstEl, secondEl): number => {
+//         const firstStartMs = firstEl.datetime_start?.getTime()
+//         const firstCompleteMs = firstEl.datetime_complete?.getTime()
+//         const firstDurationMs =
+//           firstStartMs !== undefined && firstCompleteMs !== undefined
+//             ? firstCompleteMs - firstStartMs
+//             : undefined
+//         const secondStartMs = secondEl.datetime_start?.getTime()
+//         const secondCompleteMs = secondEl.datetime_complete?.getTime()
+//         const secondDurationMs =
+//           secondStartMs !== undefined && secondCompleteMs !== undefined
+//             ? secondCompleteMs - secondStartMs
+//             : undefined
+//
+//         if (firstDurationMs === secondDurationMs) {
+//           return 0
+//         } else if (
+//           firstDurationMs !== undefined &&
+//           secondDurationMs !== undefined
+//         ) {
+//           return firstDurationMs < secondDurationMs ? 1 : -1
+//         } else if (firstDurationMs !== undefined) {
+//           return -1
+//         } else {
+//           return 1
+//         }
+//       },
+//     },
+//     {
+//       field: "params",
+//       label: "Params",
+//       toCellValue: (i) =>
+//         trials[i].params.map((p) => p.name + ": " + p.value).join(", "),
+//     },
+//   ]
+//   const collapseParamColumns: DataGridColumn<TrialParam>[] = [
+//     { field: "name", label: "Name", sortable: true },
+//     { field: "value", label: "Value", sortable: true },
+//   ]
+//   const collapseIntermediateValueColumns: DataGridColumn<
+//     TrialIntermediateValue
+//   >[] = [
+//     { field: "step", label: "Step", sortable: true },
+//     { field: "value", label: "Value", sortable: true },
+//   ]
+//   const collapseAttrColumns: DataGridColumn<Attribute>[] = [
+//     { field: "key", label: "Key", sortable: true },
+//     { field: "value", label: "Value", sortable: true },
+//   ]
+//
+//   const collapseBody = (index: number) => {
+//     return (
+//       <Grid container direction="row">
+//         <Grid item xs={6}>
+//           <Box margin={1}>
+//             <Typography variant="h6" gutterBottom component="div">
+//               Parameters
+//             </Typography>
+//             <DataGrid<TrialParam>
+//               columns={collapseParamColumns}
+//               rows={trials[index].params}
+//               keyField={"name"}
+//               dense={true}
+//               rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
+//             />
+//             <Typography variant="h6" gutterBottom component="div">
+//               Trial user attributes
+//             </Typography>
+//             <DataGrid<Attribute>
+//               columns={collapseAttrColumns}
+//               rows={trials[index].user_attrs}
+//               keyField={"key"}
+//               dense={true}
+//               rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
+//             />
+//           </Box>
+//         </Grid>
+//         <Grid item xs={6}>
+//           <Box margin={1}>
+//             <Typography variant="h6" gutterBottom component="div">
+//               Intermediate values
+//             </Typography>
+//             <DataGrid<TrialIntermediateValue>
+//               columns={collapseIntermediateValueColumns}
+//               rows={trials[index].intermediate_values}
+//               keyField={"step"}
+//               dense={true}
+//               rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
+//             />
+//             <Typography variant="h6" gutterBottom component="div">
+//               Trial system attributes
+//             </Typography>
+//             <DataGrid<Attribute>
+//               columns={collapseAttrColumns}
+//               rows={trials[index].system_attrs}
+//               keyField={"key"}
+//               dense={true}
+//               rowsPerPageOption={[5, 10, { label: "All", value: -1 }]}
+//             />
+//           </Box>
+//         </Grid>
+//       </Grid>
+//     )
+//   }
+//
+//   return (
+//     <DataGrid<Trial>
+//       columns={columns}
+//       rows={trials}
+//       keyField={"trial_id"}
+//       dense={true}
+//       collapseBody={collapseBody}
+//     />
+//   )
+// }

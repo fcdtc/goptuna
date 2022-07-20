@@ -22,7 +22,7 @@ const plotCoordinate = (trials: Trial[]) => {
     margin: {
       l: 50,
       r: 50,
-      b: 0,
+      b: 30,
     },
   }
 
