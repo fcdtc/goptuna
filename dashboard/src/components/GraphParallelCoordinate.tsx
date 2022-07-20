@@ -18,7 +18,7 @@ const plotCoordinate = (trials: Trial[]) => {
   }
 
   const layout: Partial<plotly.Layout> = {
-    title: "Parallel coordinate",
+    title: "高维参数可视化",
     margin: {
       l: 50,
       r: 50,

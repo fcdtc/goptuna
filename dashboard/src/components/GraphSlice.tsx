@@ -57,7 +57,7 @@ export const GraphSlice: FC<{
 
   return (
     <Grid container direction="row">
-      <Grid item xs={3}>
+      <Grid item xs={12}>
         <Grid container direction="column">
           {paramNames.length !== 0 && selected !== null ? (
             <FormControl component="fieldset" className={classes.formControl}>
@@ -73,7 +73,7 @@ export const GraphSlice: FC<{
           ) : null}
         </Grid>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <div id={plotDomId} />
       </Grid>
     </Grid>
@@ -86,7 +86,7 @@ const plotSlice = (trials: Trial[], selected: string | null) => {
   }
 
   const layout: Partial<plotly.Layout> = {
-    title: "Slice",
+    title: "单维参数可视化",
     margin: {
       l: 50,
       r: 50,

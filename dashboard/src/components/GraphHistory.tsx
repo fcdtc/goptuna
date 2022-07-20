@@ -4,11 +4,7 @@ import {
   Grid,
   FormControl,
   FormLabel,
-  FormControlLabel,
-  Checkbox,
   Switch,
-  Radio,
-  RadioGroup,
 } from "@material-ui/core"
 
 const plotDomId = "graph-history"
@@ -16,29 +12,29 @@ const plotDomId = "graph-history"
 export const GraphHistory: FC<{
   study: StudyDetail | null
 }> = ({ study = null }) => {
-  const [xAxis, setXAxis] = useState<string>("number")
+  const [xAxis] = useState<string>("number")
   const [logScale, setLogScale] = useState<boolean>(false)
-  const [filterCompleteTrial, setFilterCompleteTrial] = useState<boolean>(false)
-  const [filterPrunedTrial, setFilterPrunedTrial] = useState<boolean>(false)
+  const [filterCompleteTrial] = useState<boolean>(false)
+  const [filterPrunedTrial] = useState<boolean>(false)
 
-  const handleXAxisChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setXAxis(e.target.value)
-  }
+  // const handleXAxisChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setXAxis(e.target.value)
+  // }
 
   const handleLogScaleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setLogScale(!logScale)
   }
 
-  const handleFilterCompleteChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setFilterCompleteTrial(!filterCompleteTrial)
-  }
-
-  const handleFilterPrunedChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setFilterPrunedTrial(!filterPrunedTrial)
-  }
+  // const handleFilterCompleteChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault()
+  //   setFilterCompleteTrial(!filterCompleteTrial)
+  // }
+  //
+  // const handleFilterPrunedChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault()
+  //   setFilterPrunedTrial(!filterPrunedTrial)
+  // }
 
   useEffect(() => {
     if (study !== null) {
@@ -54,7 +50,7 @@ export const GraphHistory: FC<{
 
   return (
     <Grid container direction="row">
-      <Grid item xs={3}>
+      <Grid item xs={12}>
         <Grid container direction="column">
           <FormControl component="fieldset">
             <FormLabel component="legend">Log scale:</FormLabel>
@@ -64,56 +60,59 @@ export const GraphHistory: FC<{
               value="enable"
             />
           </FormControl>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Filter state:</FormLabel>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={!filterCompleteTrial}
-                  onChange={handleFilterCompleteChange}
-                />
-              }
-              label="Complete"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={!filterPrunedTrial}
-                  onChange={handleFilterPrunedChange}
-                />
-              }
-              label="Pruned"
-            />
-          </FormControl>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">X-axis:</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              value={xAxis}
-              onChange={handleXAxisChange}
-            >
-              <FormControlLabel
-                value="number"
-                control={<Radio />}
-                label="Number"
-              />
-              <FormControlLabel
-                value="datetime_start"
-                control={<Radio />}
-                label="Datetime start"
-              />
-              <FormControlLabel
-                value="datetime_complete"
-                control={<Radio />}
-                label="Datetime complete"
-              />
-            </RadioGroup>
-          </FormControl>
+          {/*<FormControl component="fieldset">*/}
+          {/*  <FormLabel component="legend">Filter state:</FormLabel>*/}
+          {/*  <FormControlLabel*/}
+          {/*    control={*/}
+          {/*      <Checkbox*/}
+          {/*        checked={!filterCompleteTrial}*/}
+          {/*        onChange={handleFilterCompleteChange}*/}
+          {/*      />*/}
+          {/*    }*/}
+          {/*    label="Complete"*/}
+          {/*  />*/}
+          {/*  <FormControlLabel*/}
+          {/*    control={*/}
+          {/*      <Checkbox*/}
+          {/*        checked={!filterPrunedTrial}*/}
+          {/*        onChange={handleFilterPrunedChange}*/}
+          {/*      />*/}
+          {/*    }*/}
+          {/*    label="Pruned"*/}
+          {/*  />*/}
+          {/*</FormControl>*/}
+          {/*<FormControl component="fieldset">*/}
+          {/*  <FormLabel component="legend">X-axis:</FormLabel>*/}
+          {/*  <RadioGroup*/}
+          {/*    aria-label="gender"*/}
+          {/*    name="gender1"*/}
+          {/*    value={xAxis}*/}
+          {/*    onChange={handleXAxisChange}*/}
+          {/*  >*/}
+          {/*    <FormControlLabel*/}
+          {/*      value="number"*/}
+          {/*      control={<Radio />}*/}
+          {/*      label="Number"*/}
+          {/*    />*/}
+          {/*    <FormControlLabel*/}
+          {/*      value="datetime_start"*/}
+          {/*      control={<Radio />}*/}
+          {/*      label="Datetime start"*/}
+          {/*    />*/}
+          {/*    <FormControlLabel*/}
+          {/*      value="datetime_complete"*/}
+          {/*      control={<Radio />}*/}
+          {/*      label="Datetime complete"*/}
+          {/*    />*/}
+          {/*  </RadioGroup>*/}
+          {/*</FormControl>*/}
         </Grid>
       </Grid>
-      <Grid item xs={9}>
-        <div id={plotDomId} />
+      <Grid item xs={12}>
+        <div>
+          <h3 style={{textAlign: "center"}}>优化过程分布</h3>
+          <div id={plotDomId} />
+        </div>
       </Grid>
     </Grid>
   )
