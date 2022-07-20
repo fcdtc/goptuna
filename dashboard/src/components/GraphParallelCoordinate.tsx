@@ -19,6 +19,7 @@ const plotCoordinate = (trials: Trial[]) => {
 
   const layout: Partial<plotly.Layout> = {
     title: "高维参数可视化",
+    height: 600,
     margin: {
       l: 50,
       r: 50,

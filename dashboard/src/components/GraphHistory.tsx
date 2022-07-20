@@ -110,7 +110,7 @@ export const GraphHistory: FC<{
       </Grid>
       <Grid item xs={12}>
         <div>
-          <h3 style={{textAlign: "center"}}>优化过程分布</h3>
+          <div style={{textAlign: "center", width: "100%", fontSize: "20px"}}>优化过程分布</div>
           <div id={plotDomId} />
         </div>
       </Grid>

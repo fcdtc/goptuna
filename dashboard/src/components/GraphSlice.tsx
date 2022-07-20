@@ -87,6 +87,7 @@ const plotSlice = (trials: Trial[], selected: string | null) => {
 
   const layout: Partial<plotly.Layout> = {
     title: "单维参数可视化",
+    height: 600,
     margin: {
       l: 50,
       r: 50,
